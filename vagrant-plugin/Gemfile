@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+group :plugins do
+  gem 'vagrant-balenaos', path: '.'
+end
+
+group :test do
+  gem 'rake', '< 11.0'
+  gem 'rubocop'
+end
