@@ -1,0 +1,7 @@
+{
+ "Author": "Robert Günzler",
+ "Website": "https://balena.io/os",
+ "Artifacts": "",
+ "Repository": "https://github.com/balena-io-playground/balenaos-vagrant",
+ "Description": "Virtual machine images of balenaOS"
+}

@@ -1,0 +1,54 @@
+{
+    "variables": {
+        "box_version": "{{ env `VERSION` }}",
+        "disk_shasum": "{{ env `DISK_SHASUM` }}"
+    },
+    "builders": [{
+        "type": "qemu",
+        "name": "balenaos",
+        "vm_name": "balenaos",
+        "output_directory": "output/balenaos",
+        "accelerator": "kvm",
+        "boot_wait": "10s",
+        "boot_command": [
+            "<enter>"
+        ],
+        "format": "qcow2",
+        "disk_image": true,
+        "use_backing_file": true,
+        "disk_size": 4989,
+        "iso_url": "output/balenaos-{{ user `box_version` }}.qcow2",
+        "iso_checksum": "{{ user `disk_shasum` }}",
+        "iso_checksum_type": "sha256",
+        "disk_cache": "none",
+        "net_device": "virtio-net",
+        "cpus": 2,
+        "memory": 2048,
+        "qemuargs": [
+            ["-netdev", "user,hostfwd=tcp::{{ .SSHHostPort }}-:22222,id=forward"],
+            ["-device", "virtio-net,netdev=forward,id=net0"]
+        ],
+        "headless": true,
+        "ssh_username": "root",
+        "ssh_password": "vagrant",
+        "ssh_port": 22,
+        "ssh_wait_timeout": "3600s",
+        "shutdown_command": "shutdown -h now"
+    }],
+    "post-processors": [[
+        {
+            "type": "vagrant",
+            "compression_level": 9,
+            "keep_input_artifact": false,
+            "vagrantfile_template": "vagrantfile.tpl.rb",
+            "output": "output/{{build_name}}-{{user `box_version`}}.box",
+            "include": ["info.json"]
+        },
+        {
+            "type": "checksum",
+            "checksum_types": ["sha256"],
+            "keep_input_artifact": false,
+            "output": "output/{{build_name}}-{{user `box_version`}}.box.sha256"
+        }
+    ]]
+}
