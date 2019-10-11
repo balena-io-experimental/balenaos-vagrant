@@ -1,2 +1,7 @@
 packer/packer_cache
 packer/output
+
+vagrant-balenaos/pkg
+vagrant-balenaos/.bundle
+vagrant-balenaos/vendor
+vagrant-balenaos/Gemfile.lock
