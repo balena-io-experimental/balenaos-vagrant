@@ -43,6 +43,21 @@ module VagrantPlugins
         require_relative 'cap/rsync'
         Cap::RSync
       end
+
+      guest_capability('balenaos', 'rsync_command') do
+        require_relative 'cap/rsync'
+        Cap::RSync
+      end
+
+      guest_capability('balenaos', 'rsync_pre') do
+        require_relative 'cap/rsync'
+        Cap::RSync
+      end
+
+      guest_capability('balenaos', 'rsync_post') do
+        require_relative 'cap/rsync'
+        Cap::RSync
+      end
     end
   end
 end
