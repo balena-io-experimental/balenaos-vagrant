@@ -9,12 +9,12 @@ module VagrantPlugins
         end
 
         def self.rsync_command(machine)
-          "#{machine.config.balenaos.suexec_cmd} rsync"
+          'rsync'
         end
 
         def self.rsync_pre(machine, opts)
           machine.communicate.tap do |comm|
-            comm.execute("#{machine.config.balenaos.suexec_cmd} mkdir -p '#{opts[:guestpath]}'")
+            comm.execute("mkdir -p '#{opts[:guestpath]}'")
           end
         end
 
@@ -22,8 +22,7 @@ module VagrantPlugins
           if opts.key?(:chown) && !opts[:chown]
             return
           end
-          suexec_cmd = machine.config.balenaos.suexec_cmd
-          machine.communicate.execute("#{suexec_cmd} #{self.build_rsync_chown(opts)}")
+          machine.communicate.execute("#{self.build_rsync_chown(opts)}")
         end
 
         def self.build_rsync_chown(opts)

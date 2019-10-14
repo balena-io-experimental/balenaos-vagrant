@@ -14,11 +14,6 @@ module VagrantPlugins
       name 'BalenaOS guest'
       description 'BalenaOS guest support.'
 
-      config('balenaos') do
-        require_relative 'config'
-        Config
-      end
-
       guest('balenaos', 'linux') do
         require_relative 'guest'
         Guest
