@@ -1,8 +1,8 @@
-VERSION ?= v2.44.0
+VERSION ?= v2.38.0+rev1
 OUTPUT ?= ./output
 
-RAW_DISK = $(OUTPUT)/balena-qemux86-64-$(VERSION).img
-QEMU_IMG = $(OUTPUT)/balenaos-$(VERSION).qcow2
+RAW_DISK = balena-qemux86-64-$(VERSION).img
+QEMU_IMG = $(OUTPUT)/balenaos.qcow2
 BOX = $(QEMU_IMG:qcow2=box)
 
 all: $(BOX)
@@ -26,8 +26,7 @@ $(QEMU_IMG): $(RAW_DISK)
 	qemu-img convert -f raw -c -O qcow2 $< $@
 
 $(RAW_DISK):
-	@echo $@
-	@echo "TODO get latest balena-qemux86-64 image"
+	balena os download qemux86-64 --version $(VERSION) --output $@
 
 clean:
 	rm -rf $(RAW_DISK)

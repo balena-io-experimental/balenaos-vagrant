@@ -17,7 +17,7 @@
         "disk_image": true,
         "use_backing_file": true,
         "disk_size": 4989,
-        "iso_url": "output/balenaos-{{ user `box_version` }}.qcow2",
+        "iso_url": "output/balenaos.qcow2",
         "iso_checksum": "{{ user `disk_shasum` }}",
         "iso_checksum_type": "sha256",
         "disk_cache": "none",
@@ -30,8 +30,7 @@
         ],
         "headless": true,
         "ssh_username": "root",
-        "ssh_password": "vagrant",
-        "ssh_port": 22,
+        "ssh_port": 22222,
         "ssh_wait_timeout": "3600s",
         "shutdown_command": "shutdown -h now"
     }],
